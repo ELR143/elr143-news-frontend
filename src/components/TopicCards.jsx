@@ -12,7 +12,7 @@ export default function TopicCards({ topics, setTopics }) {
 
   return (
     <section>
-      {Topics.map((topic) => {
+      {topics.map((topic) => {
         return (
           <Card key={article.article_id}>
             <div>
