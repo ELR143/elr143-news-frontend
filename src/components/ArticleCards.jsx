@@ -15,7 +15,6 @@ export default function ArticleCards() {
     });
   }, []);
 
-
   return (
     <section>
       {articles.map((article) => {
@@ -31,7 +30,6 @@ export default function ArticleCards() {
                 </p>
               </div>
             </Card>
-
           </Link>
         );
       })}

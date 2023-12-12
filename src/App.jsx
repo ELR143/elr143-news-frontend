@@ -8,14 +8,14 @@ import ArticleByIdCard from "./components/ArticleByIdCard";
 function App() {
   return (
     <BrowserRouter>
-    <main className='app'>
-      <Routes>
-      <Route path='/home' element={<HomePage />} />
-      <Route path='/articles/:article_id' element={<ArticleByIdCard />} />
-      {/* <Route path='/articles/:article_id' element={<HomePage />} /> */}
-      </Routes>
-    </main>
-</BrowserRouter>
+      <main className='app'>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/articles/:article_id' element={<ArticleByIdCard />} />
+          {/* <Route path='/articles/:article_id' element={<HomePage />} /> */}
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 }
 
