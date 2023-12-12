@@ -8,10 +8,10 @@ function App() {
 const [articles, setArticles] = useState([])
 
   return (
-    <>
+    <BrowserRouter>
       <Header />
       <ArticleCards articles={articles} setArticles={setArticles}/>
-    </>
+    </BrowserRouter>
   );
 }
 

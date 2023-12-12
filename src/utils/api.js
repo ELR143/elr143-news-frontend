@@ -7,3 +7,9 @@ export const getArticles = () => {
         return data.articles
     })
 }
+
+export const getTopics = () => {
+    return newsServer.get('/topics').then(({data}) => {
+        return data.articles
+    })
+}
