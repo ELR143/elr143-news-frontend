@@ -5,7 +5,6 @@ import "./App.css";
 import HomePage from "./pages/HomePage";
 import ArticleByIdCard from "./components/ArticleByIdCard";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -15,9 +14,8 @@ function App() {
       <Route path='/articles/:article_id' element={<ArticleByIdCard />} />
       {/* <Route path='/articles/:article_id' element={<HomePage />} /> */}
       </Routes>
-    
-    </main></BrowserRouter>
-    
+    </main>
+</BrowserRouter>
   );
 }
 
