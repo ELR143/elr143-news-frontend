@@ -12,7 +12,7 @@ export default function ArticleByIdCard() {
 
   useEffect(() => {
     getArticleById(article_id).then((articleData) => {
-      const copyArticleData = articleData;
+      const copyArticleData = { ...articleData };
       copyArticleData.topic =
         copyArticleData.topic.charAt(0).toUpperCase() +
         copyArticleData.topic.slice(1);
