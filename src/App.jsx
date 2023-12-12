@@ -1,15 +1,21 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
 import "./App.css";
-import Header from "./components/Header";
-import ArticleCards from "./components/ArticleCards";
+import HomePage from "./pages/HomePage";
+import ArticleByIdCard from "./components/ArticleByIdCard";
 
 function App() {
   return (
-    <>
-      <Header />
-      <ArticleCards />
-    </>
+    <BrowserRouter>
+    <main className='app'>
+      <Routes>
+      <Route path='/home' element={<HomePage />} />
+      <Route path='/articles/:article_id' element={<ArticleByIdCard />} />
+      {/* <Route path='/articles/:article_id' element={<HomePage />} /> */}
+      </Routes>
+    </main>
+</BrowserRouter>
   );
 }
 

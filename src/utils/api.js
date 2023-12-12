@@ -1,9 +1,17 @@
-import axios from 'axios'
+import axios from "axios";
 
-const newsServer = axios.create({baseURL: 'https://elr143-news-server.onrender.com/api'})
+const newsServer = axios.create({
+  baseURL: "https://elr143-news-server.onrender.com/api",
+});
 
 export const getArticles = () => {
-    return newsServer.get('/articles').then(({data}) => {
-        return data.articles
-    })
-}
+  return newsServer.get("/articles").then(({ data }) => {
+    return data.articles;
+  });
+};
+
+export const getArticleById = (article_id) => {
+  return newsServer.get(`/articles/${article_id}`).then(({ data }) => {
+    return data.article;
+  });
+};
