@@ -1,21 +1,17 @@
 import React from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getArticles } from "../utils/api";
 import { Card } from "./Card";
 
-export default function ArticleCards({
-  articles,
-  setArticles,
-  isLoading,
-  setIsLoading,
-}) {
+export default function ArticleCards() {
+  const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    setIsLoading(true);
     getArticles().then((data) => {
       setArticles(data);
       setIsLoading(false);
     });
-  }, [articles]);
+  }, []);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
