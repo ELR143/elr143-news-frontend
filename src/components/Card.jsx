@@ -4,7 +4,6 @@ export function Card({ children }) {
   const [isClicked, setIsClicked] = useState(false);
 
   function handleClick() {
-    console.log('clicked')
     setIsClicked(!isClicked);
   }
 
