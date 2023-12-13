@@ -21,3 +21,13 @@ export const getCommentsByArticleId = (article_id) => {
     return data.comments;
   });
 };
+
+export const updateArticleVotes = (article_id, inc_votes) => {
+  const patchBody = {
+    inc_votes: `${inc_votes}`
+  }
+
+  return newsServer.patch(`/articles/${article_id}/comments`, patchBody).then(({data}) => {
+    return data.article
+  })
+}
