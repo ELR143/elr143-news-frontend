@@ -1,5 +1,4 @@
-import { React, useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import React from "react";
 import { updateArticleVotes } from "./api";
 
 export const upVote = (
@@ -11,32 +10,23 @@ export const upVote = (
 ) => {
   const articleId = article.article_id;
 
-  let increment = 0;
-  if (isUpvoteActive) {
-    increment = -1;
-  } else {
-    increment = 1;
-  }
+  let increment = isUpvoteActive ? -1 : 1;
+
+  setArticle((currentArticle) => ({
+    ...currentArticle,
+    votes: currentArticle.votes + increment,
+  }));
 
   updateArticleVotes(increment, articleId)
     .then(() => {
-      setArticle((updatedArticle) => {
-        const newVotes = isUpvoteActive
-          ? updatedArticle.votes - 1
-          : updatedArticle.votes + 1;
-
-        setIsUpvoteActive(!isUpvoteActive);
-
-        return {
-          ...updatedArticle,
-          votes: newVotes,
-        };
-      });
+      setIsUpvoteActive(!isUpvoteActive);
     })
     .catch((err) => {
-      setError({message: 'Internet Connection Issue: Your vote has not been logged. Please try again later'});
-      setIsLoading(false);
-      console.log(err);
+      setError({ message: "Something went wrong. Please try again later" });
+      setArticle((currentArticle) => ({
+        ...currentArticle,
+        votes: currentArticle.votes - increment,
+      }));
     });
 };
 
@@ -56,6 +46,8 @@ export const downVote = (
     increment = -1;
   }
 
+  updateArticleVotes(increment, articleId);
+
   updateArticleVotes(increment, articleId)
     .then(() => {
       setArticle((updatedArticle) => {
@@ -72,8 +64,6 @@ export const downVote = (
       });
     })
     .catch((err) => {
-      setError({message: 'Internet Connection Issue: Your vote has not been logged. Please try again later'});
-      setIsLoading(false);
-      console.log(err);
+      setError({ message: "Something went wrong. Please try again later" });
     });
 };
