@@ -9,7 +9,7 @@ import { ErrorNotFoundPage } from "../pages/ErrorNotFoundPage";
 export default function ArticleByIdCard() {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
   const [isUpvoteActive, setIsUpvoteActive] = useState(false);
   const [isDownvoteActive, setIsDownvoteActive] = useState(false);
 
@@ -17,25 +17,21 @@ export default function ArticleByIdCard() {
 
   useEffect(() => {
     setIsLoading(true);
-    getArticleById(article_id)
-      .then((articleData) => {
-        const copyArticleData = { ...articleData };
-        copyArticleData.topic =
-          copyArticleData.topic.charAt(0).toUpperCase() +
-          copyArticleData.topic.slice(1);
-        setArticle(copyArticleData);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setError('Something went wrong')
-        setIsLoading(false)
-        console.log(error)
-      });
+    getArticleById(article_id).then((articleData) => {
+      const copyArticleData = { ...articleData };
+      copyArticleData.topic =
+        copyArticleData.topic.charAt(0).toUpperCase() +
+        copyArticleData.topic.slice(1);
+      setArticle(copyArticleData);
+      setIsLoading(false);
+    });
   }, []);
 
-if (error) {
-  return <ErrorNotFoundPage />
-}
+  if (error.message) {
+    alert(error.message);
+  } else if (error) {
+    return <ErrorNotFoundPage />;
+  }
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -50,7 +46,13 @@ if (error) {
           className={isUpvoteActive ? "upvote-active" : ""}
           onClick={() => {
             {
-              upVote(article, setArticle, isUpvoteActive, setIsUpvoteActive);
+              upVote(
+                article,
+                setArticle,
+                isUpvoteActive,
+                setIsUpvoteActive,
+                setError
+              );
             }
           }}
         >
@@ -65,7 +67,8 @@ if (error) {
                 article,
                 setArticle,
                 isDownvoteActive,
-                setIsDownvoteActive
+                setIsDownvoteActive,
+                setError
               );
             }
           }}
