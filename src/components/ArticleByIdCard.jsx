@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById } from "../utils/api";
 import { upVote, downVote } from "../utils/handleVotes";
-import Header from "./Header";
-import { ErrorNotFoundPage } from "../pages/ErrorNotFoundPage";
+import Header from "./HeaderUser";
+import { ErrorPathNotFound } from "../pages/ErrorPathNotFound";
+import { Error } from "./Error";
 
 export default function ArticleByIdCard() {
   const [article, setArticle] = useState({});
@@ -27,20 +28,16 @@ export default function ArticleByIdCard() {
     });
   }, []);
 
-  if (error.message) {
-    alert(error.message);
-    setError(false)
-  } else if (error) {
-    return <ErrorNotFoundPage />;
-    setError(false)
+  if (error) {
+    return <Error message='Something went wrong. Please try again later' />;
   }
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <h1>Loading article...</h1>;
   } else {
     return (
       <section>
-        <Header title={article.title} />
+        <h1>{article.title}</h1>
         <p>{article.topic}</p>
         <p>{article.author}</p>
         <p>{article.body}</p>

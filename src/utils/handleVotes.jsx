@@ -18,9 +18,11 @@ export const upVote = (
   updateArticleVotes(1, articleId)
     .then(() => {
       setIsUpvoteActive(!isUpvoteActive);
+
+      setError(false);
     })
     .catch((err) => {
-      setError({ message: "Something went wrong. Please try again later" });
+      setError(true);
       setArticle((currentArticle) => ({
         ...currentArticle,
         votes: currentArticle.votes - 1,
@@ -45,9 +47,10 @@ export const downVote = (
   updateArticleVotes(-1, articleId)
     .then(() => {
       setIsDownvoteActive(!isDownvoteActive);
+      setError(false);
     })
     .catch((err) => {
-      setError({ message: "Something went wrong. Please try again later" });
+      setError(true);
       setArticle((currentArticle) => ({
         ...currentArticle,
         votes: currentArticle.votes + 1,
