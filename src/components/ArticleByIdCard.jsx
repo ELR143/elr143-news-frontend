@@ -44,7 +44,8 @@ export default function ArticleByIdCard() {
         <p>{article.body}</p>
         <button
           className={isUpvoteActive ? "upvote-active" : ""}
-          onClick={() => {
+          onClick={(e) => {
+            e.target.disabled = true;
             {
               upVote(
                 article,
@@ -61,7 +62,8 @@ export default function ArticleByIdCard() {
         <p>{article.votes}</p>
         <button
           className={isDownvoteActive ? "downvote-active" : ""}
-          onClick={() => {
+          onClick={(e) => {
+            e.target.disabled = true;
             {
               downVote(
                 article,

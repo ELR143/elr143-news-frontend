@@ -10,14 +10,12 @@ export const upVote = (
 ) => {
   const articleId = article.article_id;
 
-  let increment = isUpvoteActive ? -1 : 1;
-
   setArticle((currentArticle) => ({
     ...currentArticle,
-    votes: currentArticle.votes + increment,
+    votes: currentArticle.votes + 1,
   }));
 
-  updateArticleVotes(increment, articleId)
+  updateArticleVotes(1, articleId)
     .then(() => {
       setIsUpvoteActive(!isUpvoteActive);
     })
@@ -25,7 +23,7 @@ export const upVote = (
       setError({ message: "Something went wrong. Please try again later" });
       setArticle((currentArticle) => ({
         ...currentArticle,
-        votes: currentArticle.votes - increment,
+        votes: currentArticle.votes - 1,
       }));
     });
 };
@@ -39,31 +37,20 @@ export const downVote = (
 ) => {
   const articleId = article.article_id;
 
-  let increment = 0;
-  if (isDownvoteActive) {
-    increment = 1;
-  } else {
-    increment = -1;
-  }
+  setArticle((currentArticle) => ({
+    ...currentArticle,
+    votes: currentArticle.votes - 1,
+  }));
 
-  updateArticleVotes(increment, articleId);
-
-  updateArticleVotes(increment, articleId)
+  updateArticleVotes(-1, articleId)
     .then(() => {
-      setArticle((updatedArticle) => {
-        const newVotes = isDownvoteActive
-          ? updatedArticle.votes + 1
-          : updatedArticle.votes - 1;
-
-        setIsDownvoteActive(!isDownvoteActive);
-
-        return {
-          ...updatedArticle,
-          votes: newVotes,
-        };
-      });
+      setIsDownvoteActive(!isDownvoteActive);
     })
     .catch((err) => {
       setError({ message: "Something went wrong. Please try again later" });
+      setArticle((currentArticle) => ({
+        ...currentArticle,
+        votes: currentArticle.votes + 1,
+      }));
     });
 };
