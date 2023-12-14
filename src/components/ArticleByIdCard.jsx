@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getArticleById } from "../utils/api";
 import { upVote, downVote } from "../utils/handleVotes";
 import Header from "./Header";
-import { ErrorNotFoundPage } from "../pages/ErrorNotFoundPage";
+import { ErrorPathNotFound } from "../pages/ErrorPathNotFound";
 
 export default function ArticleByIdCard() {
   const [article, setArticle] = useState({});
@@ -27,12 +27,8 @@ export default function ArticleByIdCard() {
     });
   }, []);
 
-  if (error.message) {
-    alert(error.message);
-    setError(false)
-  } else if (error) {
-    return <ErrorNotFoundPage />;
-    setError(false)
+  if (error) {
+    return <Error message='Something went wrong. Please try again later' />;
   }
 
   if (isLoading) {
