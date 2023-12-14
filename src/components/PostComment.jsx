@@ -6,6 +6,7 @@ import { Error } from "./Error";
 export default function PostComment({ setComments, setIsLoading }) {
   const [input, setInput] = useState("");
   const [error, setError] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   const { article_id } = useParams();
 
@@ -15,6 +16,7 @@ export default function PostComment({ setComments, setIsLoading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDisabled(true);
     setIsLoading(true);
 
     const optimisticComment = {
@@ -26,6 +28,7 @@ export default function PostComment({ setComments, setIsLoading }) {
     setComments((currentComments) => {
       return [optimisticComment, ...currentComments];
     });
+    // setInput("");
 
     postComment(input, article_id)
       .then((comment) => {
@@ -38,11 +41,13 @@ export default function PostComment({ setComments, setIsLoading }) {
         });
         setInput("");
         setIsLoading(false);
+        setDisabled(false)
       })
       .catch(() => {
         setInput("");
         setError(true);
         setIsLoading(false);
+        setDisabled(false)
         setComments((currentComments) => {
           const resetComments = currentComments.filter((comment) => {
             return comment.comment_id !== null;
@@ -68,7 +73,7 @@ export default function PostComment({ setComments, setIsLoading }) {
             value={input}
           ></input>
         </label>
-        <button>Post</button>
+        <button disabled={input.length < 1 || disabled}>Post</button>
       </form>
     </section>
   );
