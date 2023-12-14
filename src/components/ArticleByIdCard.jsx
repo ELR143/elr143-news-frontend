@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById } from "../utils/api";
 import { upVote, downVote } from "../utils/handleVotes";
-import Header from "./Header";
+import Header from "./HeaderUser";
 import { ErrorNotFoundPage } from "../pages/ErrorNotFoundPage";
 
 export default function ArticleByIdCard() {
@@ -38,7 +38,7 @@ export default function ArticleByIdCard() {
   } else {
     return (
       <section>
-        <Header title={article.title} />
+        <h1>{article.title}</h1>
         <p>{article.topic}</p>
         <p>{article.author}</p>
         <p>{article.body}</p>
