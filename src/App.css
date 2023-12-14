@@ -11,9 +11,17 @@
   border-radius: 4px;
   padding: 16px;
   margin: 16px;
-  text-align: center;
+  text-align: left;
 }
 
 .card:hover {
   background-color:rgb(233, 233, 233);
+}
+
+.upvote-active {
+  background-color:rgb(12, 195, 18);
+}
+
+.downvote-active {
+  background-color:rgb(223, 0, 0);
 }
