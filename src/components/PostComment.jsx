@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { postComment } from "../utils/api";
 import { useParams } from "react-router-dom";
+import { Error } from "./Error";
 
-export default function PostComment({
-  comments,
-  setComments,
-  isLoading,
-  setIsLoading,
-}) {
+export default function PostComment({ setComments, setIsLoading }) {
   const [input, setInput] = useState("");
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState(false);
 
   const { article_id } = useParams();
 
@@ -20,17 +16,44 @@ export default function PostComment({
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    postComment(input, article_id).then((comment) => {
-      setComments((currentComments) => {
-        return [comment, ...currentComments];
-      });
-      setInput("");
-      setIsLoading(false);
+
+    const optimisticComment = {
+      username: "tickle122",
+      body: input,
+      comment_id: null,
+    };
+
+    setComments((currentComments) => {
+      return [optimisticComment, ...currentComments];
     });
+
+    postComment(input, article_id)
+      .then((comment) => {
+        setComments((currentComments) => {
+          const resetComments = currentComments.filter((comment) => {
+            return comment.comment_id !== null;
+          });
+          console.log(currentComments);
+          return [comment, ...resetComments];
+        });
+        setInput("");
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setInput("");
+        setError(true);
+        setIsLoading(false);
+        setComments((currentComments) => {
+          const resetComments = currentComments.filter((comment) => {
+            return comment.comment_id !== null;
+          });
+          return [...resetComments];
+        });
+      });
   };
 
-  if (isError) {
-    return <ErrorPage message='sedfkljsdhlfkgj' />;
+  if (error) {
+    return <Error message='Something went wrong. Please try again later' />;
   }
 
   return (

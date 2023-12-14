@@ -10,24 +10,14 @@ export default function CommentCards({
   isLoading,
   setIsLoading,
 }) {
-  const [isError, setIsError] = useState(false);
   const { article_id } = useParams();
 
   useEffect(() => {
-    getCommentsByArticleId(article_id)
-      .then((commentsArray) => {
-        setComments(commentsArray);
-        setIsLoading(false);
-      })
-      .catch(({ response }) => {
-        console.log(response, "in comments");
-      });
+    getCommentsByArticleId(article_id).then((commentsArray) => {
+      setComments(commentsArray);
+      setIsLoading(false);
+    });
   }, []);
-
-  if (isError) {
-    setIsError(false)
-    return <ErrorPage message='commentcards' />;
-  }
 
   if (isLoading) {
     return <h1>Loading comments...</h1>;

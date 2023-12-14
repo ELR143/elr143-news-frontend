@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 import { getArticleById } from "../utils/api";
 import { upVote, downVote } from "../utils/handleVotes";
 import Header from "./HeaderUser";
-import { ErrorPage } from "../pages/ErrorPathNotFound";
+import { ErrorPathNotFound } from "../pages/ErrorPathNotFound";
 import { Error } from "./Error";
 
 export default function ArticleByIdCard() {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false)
+  const [error, setError] = useState(false);
   const [isUpvoteActive, setIsUpvoteActive] = useState(false);
   const [isDownvoteActive, setIsDownvoteActive] = useState(false);
 
@@ -25,14 +25,11 @@ export default function ArticleByIdCard() {
         copyArticleData.topic.slice(1);
       setArticle(copyArticleData);
       setIsLoading(false);
-    }).catch(({response}) => {
-      console.log(response, 'in articlebyid')
-      setIsError({message: 'hi there' })
     });
   }, []);
 
-  if(isError) {
-    return <Error message='articleById' />
+  if (error) {
+    return <Error message='Something went wrong. Please try again later' />;
   }
 
   if (isLoading) {
@@ -46,14 +43,15 @@ export default function ArticleByIdCard() {
         <p>{article.body}</p>
         <button
           className={isUpvoteActive ? "upvote-active" : ""}
-          onClick={() => {
+          onClick={(e) => {
+            e.target.disabled = true;
             {
               upVote(
                 article,
                 setArticle,
                 isUpvoteActive,
                 setIsUpvoteActive,
-                setIsError
+                setError
               );
             }
           }}
@@ -63,14 +61,15 @@ export default function ArticleByIdCard() {
         <p>{article.votes}</p>
         <button
           className={isDownvoteActive ? "downvote-active" : ""}
-          onClick={() => {
+          onClick={(e) => {
+            e.target.disabled = true;
             {
               downVote(
                 article,
                 setArticle,
                 isDownvoteActive,
                 setIsDownvoteActive,
-                setIsError
+                setError
               );
             }
           }}

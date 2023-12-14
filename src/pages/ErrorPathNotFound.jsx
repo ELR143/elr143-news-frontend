@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const ErrorPage = ({message}) => {
+export const ErrorPathNotFound = ({ title, message }) => {
   return (
     <section className='error'>
-      <h2>{message}</h2>
-      <Link to={'/'}>
-        Go back to all articles
-      </Link>
+      <h2>{title}</h2>
+      <p>{message}</p>
+      <Link to={"/"}>Go back to all articles</Link>
     </section>
   );
 };
