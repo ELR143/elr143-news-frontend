@@ -29,8 +29,10 @@ export default function ArticleByIdCard() {
 
   if (error.message) {
     alert(error.message);
+    setError(false)
   } else if (error) {
     return <ErrorNotFoundPage />;
+    setError(false)
   }
 
   if (isLoading) {
