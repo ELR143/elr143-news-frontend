@@ -18,6 +18,7 @@ export const upVote = (
   updateArticleVotes(1, articleId)
     .then(() => {
       setIsUpvoteActive(!isUpvoteActive);
+
       setError(false);
     })
     .catch((err) => {
