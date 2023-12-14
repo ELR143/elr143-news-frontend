@@ -1,5 +1,3 @@
-import { React, useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 import { updateArticleVotes } from "./api";
 
 export const upVote = (
@@ -7,7 +5,7 @@ export const upVote = (
   setArticle,
   isUpvoteActive,
   setIsUpvoteActive,
-  setError
+  setIsError
 ) => {
   const articleId = article.article_id;
 
@@ -34,9 +32,8 @@ export const upVote = (
       });
     })
     .catch((err) => {
-      setError({message: 'Internet Connection Issue: Your vote has not been logged. Please try again later'});
-      setIsLoading(false);
       console.log(err);
+      setIsError(err);
     });
 };
 
@@ -45,7 +42,7 @@ export const downVote = (
   setArticle,
   isDownvoteActive,
   setIsDownvoteActive,
-  setError
+  setIsError
 ) => {
   const articleId = article.article_id;
 
@@ -72,8 +69,7 @@ export const downVote = (
       });
     })
     .catch((err) => {
-      setError({message: 'Internet Connection Issue: Your vote has not been logged. Please try again later'});
-      setIsLoading(false);
       console.log(err);
+      setIsError(err);
     });
 };

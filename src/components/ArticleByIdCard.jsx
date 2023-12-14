@@ -4,12 +4,13 @@ import { useParams } from "react-router-dom";
 import { getArticleById } from "../utils/api";
 import { upVote, downVote } from "../utils/handleVotes";
 import Header from "./HeaderUser";
-import { ErrorNotFoundPage } from "../pages/ErrorNotFoundPage";
+import { ErrorPage } from "../pages/ErrorPathNotFound";
+import { Error } from "./Error";
 
 export default function ArticleByIdCard() {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [isError, setIsError] = useState(false)
   const [isUpvoteActive, setIsUpvoteActive] = useState(false);
   const [isDownvoteActive, setIsDownvoteActive] = useState(false);
 
@@ -24,17 +25,18 @@ export default function ArticleByIdCard() {
         copyArticleData.topic.slice(1);
       setArticle(copyArticleData);
       setIsLoading(false);
+    }).catch(({response}) => {
+      console.log(response, 'in articlebyid')
+      setIsError({message: 'hi there' })
     });
   }, []);
 
-  if (error.message) {
-    alert(error.message);
-  } else if (error) {
-    return <ErrorNotFoundPage />;
+  if(isError) {
+    return <Error message='articleById' />
   }
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <h1>Loading article...</h1>;
   } else {
     return (
       <section>
@@ -51,7 +53,7 @@ export default function ArticleByIdCard() {
                 setArticle,
                 isUpvoteActive,
                 setIsUpvoteActive,
-                setError
+                setIsError
               );
             }
           }}
@@ -68,7 +70,7 @@ export default function ArticleByIdCard() {
                 setArticle,
                 isDownvoteActive,
                 setIsDownvoteActive,
-                setError
+                setIsError
               );
             }
           }}

@@ -7,6 +7,7 @@ import { Card } from "./Card";
 export default function ArticleCards() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     setIsLoading(true)
@@ -16,8 +17,12 @@ export default function ArticleCards() {
     });
   }, []);
 
+  if(isError) {
+    return <ErrorPage message='articlecards' />
+  }
+
   if (isLoading) {
-    return <h1>Loading...</h1>
+    return <h1>Loading articles...</h1>
   } else {
     return (
       <section>

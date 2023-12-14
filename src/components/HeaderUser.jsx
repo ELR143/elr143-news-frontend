@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function Header({ title }) {
-  return <h1 className='header-user-container'>{title}</h1>;
+export default function Header() {
+  return <h1 className='header-user-container'>ELR News</h1>;
 }
