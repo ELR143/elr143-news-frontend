@@ -9,7 +9,7 @@ export default function ArticleCards() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     getArticles().then((data) => {
       setArticles(data);
       setIsLoading(false);
@@ -17,13 +17,16 @@ export default function ArticleCards() {
   }, []);
 
   if (isLoading) {
-    return <h1>Loading...</h1>
+    return <h1>Loading...</h1>;
   } else {
     return (
       <section>
         {articles.map((article) => {
           return (
-            <Link key={article.article_id} to={`/articles/${article.article_id}`}>
+            <Link
+              key={article.article_id}
+              to={`/articles/${article.article_id}`}
+            >
               <Card key={article.article_id}>
                 <div>
                   <h2>{article.title}</h2>
@@ -40,5 +43,4 @@ export default function ArticleCards() {
       </section>
     );
   }
-  }
-  
+}

@@ -1,13 +1,25 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getCommentsByArticleId } from "../utils/api";
-import { Card } from "./Card";
+import { useState } from "react";
 import CommentCards from "./CommentCards";
+import PostComment from "./PostComment";
 
 export default function CommentsContainer() {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  return <CommentCards comments={comments} setComments={setComments} setIsLoading={setIsLoading} />;
+  return (
+    <section>
+      <PostComment
+        isLoading={isLoading}
+        setComments={setComments}
+        setIsLoading={setIsLoading}
+      />
+      <CommentCards
+        comments={comments}
+        setComments={setComments}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
+    </section>
+  );
 }

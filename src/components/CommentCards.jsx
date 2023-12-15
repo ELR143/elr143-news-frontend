@@ -3,8 +3,15 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { deleteComment, getCommentsByArticleId } from "../utils/api";
 import { Card } from "./Card";
+import Error from "./Error";
+import ClipLoader from "react-spinners/ClipLoader";
 
-export default function CommentCards({ comments, setComments, setIsLoading }) {
+export default function CommentCards({
+  comments,
+  setComments,
+  isLoading,
+  setIsLoading,
+}) {
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState(false);
   const { article_id } = useParams();
@@ -22,13 +29,14 @@ export default function CommentCards({ comments, setComments, setIsLoading }) {
           return comment;
         }
       });
-      setDisabled(false);
       return optimisiticComments;
     });
 
     deleteComment(comment_id)
       .then(() => {
+        setIsLoading(true);
         setDisabled(false);
+        setIsLoading(false);
       })
       .catch(() => {
         setError(true);
@@ -46,9 +54,16 @@ export default function CommentCards({ comments, setComments, setIsLoading }) {
   }, []);
 
   if (error) {
-    return <Error message={'Something went wrong. Please try again later'} />;
+    return <Error message={"Something went wrong. Please try again later"} />;
   }
 
+  if (isLoading) {
+    return (
+      <div className='loader-container'>
+        <ClipLoader color={"#F696969"} size={20} />
+      </div>
+    );
+  }
   return (
     <section>
       {comments.map((comment) => {

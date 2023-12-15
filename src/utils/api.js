@@ -41,6 +41,7 @@ export const postComment = (body, article_id) => {
   return newsServer
     .post(`/articles/${article_id}/comments`, postBody)
     .then(({ data }) => {
+      console.log(data.comment)
       return data.comment;
     });
 };

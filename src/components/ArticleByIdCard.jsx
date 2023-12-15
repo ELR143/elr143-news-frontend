@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getArticleById } from "../utils/api";
 import { upVote, downVote } from "../utils/handleVotes";
 import Header from "./Header";
-import { ErrorPathNotFound } from "../pages/ErrorPathNotFound";
+import Error from "./Error";
 
 export default function ArticleByIdCard() {
   const [article, setArticle] = useState({});
