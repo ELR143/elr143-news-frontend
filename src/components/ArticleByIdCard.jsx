@@ -32,11 +32,11 @@ export default function ArticleByIdCard() {
   }
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <h1>Loading article...</h1>;
   } else {
     return (
       <section>
-        <Header title={article.title} />
+        <h1>{article.title}</h1>
         <p>{article.topic}</p>
         <p>{article.author}</p>
         <p>{article.body}</p>

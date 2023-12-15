@@ -1,5 +1,6 @@
 import React from "react";
 
+
 export default function Error({ title, message }) {
   return (
     <section className='error'>
@@ -7,4 +8,5 @@ export default function Error({ title, message }) {
       <h3>{message}</h3>
     </section>
   );
-}
+};
+

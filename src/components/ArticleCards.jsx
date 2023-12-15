@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getArticles } from "../utils/api";
 import { Card } from "./Card";
+import { Error } from "./Error";
 
 export default function ArticleCards() {
   const [articles, setArticles] = useState([]);

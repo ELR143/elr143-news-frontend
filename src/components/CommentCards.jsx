@@ -12,6 +12,7 @@ export default function CommentCards({
   isLoading,
   setIsLoading,
 }) {
+
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState(false);
   const { article_id } = useParams();

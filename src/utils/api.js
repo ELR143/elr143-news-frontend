@@ -30,7 +30,19 @@ export const updateArticleVotes = (inc_votes, article_id) => {
     .patch(`/articles/${article_id}`, patchBody)
     .then(({ data }) => {
       return data.article;
-    })
+    });
+};
+
+export const postComment = (body, article_id) => {
+  const postBody = {
+    username: "tickle122",
+    body: body,
+  };
+  return newsServer
+    .post(`/articles/${article_id}/comments`, postBody)
+    .then(({ data }) => {
+      return data.comment;
+    });
 };
 
 export const postComment = (body, article_id) => {

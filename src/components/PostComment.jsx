@@ -62,7 +62,7 @@ export default function PostComment({ setComments, isLoading, setIsLoading }) {
   if (error) {
     return <Error message='Something went wrong. Please try again later' />;
   }
-
+  
   if (isLoading) {
     return <h1>Loading...</h1>;
   } else {
