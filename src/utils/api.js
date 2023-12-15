@@ -45,19 +45,6 @@ export const postComment = (body, article_id) => {
     });
 };
 
-export const postComment = (body, article_id) => {
-  const postBody = {
-    username: "tickle122",
-    body: body,
-  };
-  return newsServer
-    .post(`/articles/${article_id}/comments`, postBody)
-    .then(({ data }) => {
-      console.log(data.comment)
-      return data.comment;
-    });
-};
-
 export const deleteComment = (comment_id) => {
   return newsServer.delete(`/comments/${comment_id}`)
 }
