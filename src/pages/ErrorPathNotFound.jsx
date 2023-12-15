@@ -10,3 +10,4 @@ export const ErrorPathNotFound = ({ title, message }) => {
     </section>
   );
 };
+

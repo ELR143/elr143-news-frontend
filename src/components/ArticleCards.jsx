@@ -18,7 +18,7 @@ export default function ArticleCards() {
   }, []);
 
   if (isLoading) {
-    return <h1>Loading articles...</h1>;
+    return <h1>Loading...</h1>;
   } else {
     return (
       <section>

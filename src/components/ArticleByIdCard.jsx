@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById } from "../utils/api";
 import { upVote, downVote } from "../utils/handleVotes";
-import Header from "./HeaderUser";
-import { ErrorPathNotFound } from "../pages/ErrorPathNotFound";
-import { Error } from "./Error";
+import Header from "./Header";
+import Error from "./Error";
 
 export default function ArticleByIdCard() {
   const [article, setArticle] = useState({});

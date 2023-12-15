@@ -1,8 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getCommentsByArticleId } from "../utils/api";
-import { Card } from "./Card";
+import { useState } from "react";
 import CommentCards from "./CommentCards";
 import PostComment from "./PostComment";
 
@@ -13,7 +10,6 @@ export default function CommentsContainer() {
   return (
     <section>
       <PostComment
-        comments={comments}
         isLoading={isLoading}
         setComments={setComments}
         setIsLoading={setIsLoading}
