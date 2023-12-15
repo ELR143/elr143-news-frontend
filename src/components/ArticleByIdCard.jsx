@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById } from "../utils/api";
 import { upVote, downVote } from "../utils/handleVotes";
-import Header from "./Header";
 import Error from "./Error";
 
 export default function ArticleByIdCard() {
@@ -35,13 +34,14 @@ export default function ArticleByIdCard() {
     return <h1>Loading article...</h1>;
   } else {
     return (
-      <section>
+      <section className='single-article'>
+        <img className='article-image' src={article.article_img_url}></img>
         <h1>{article.title}</h1>
         <p>{article.topic}</p>
         <p>{article.author}</p>
         <p>{article.body}</p>
         <button
-          className={isUpvoteActive ? "upvote-active" : ""}
+          className={isUpvoteActive ? "upvote-active" : "button"}
           onClick={(e) => {
             e.target.disabled = true;
             {
@@ -59,7 +59,7 @@ export default function ArticleByIdCard() {
         </button>
         <p>{article.votes}</p>
         <button
-          className={isDownvoteActive ? "downvote-active" : ""}
+          className={isDownvoteActive ? "downvote-active" : "button"}
           onClick={(e) => {
             e.target.disabled = true;
             {

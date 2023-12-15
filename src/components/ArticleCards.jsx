@@ -2,8 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getArticles } from "../utils/api";
-import { Card } from "./Card";
-import { Error } from "./Error";
 
 export default function ArticleCards() {
   const [articles, setArticles] = useState([]);
@@ -21,23 +19,27 @@ export default function ArticleCards() {
     return <h1>Loading...</h1>;
   } else {
     return (
-      <section>
+      <section className='article-grid-container'>
         {articles.map((article) => {
           return (
             <Link
               key={article.article_id}
               to={`/articles/${article.article_id}`}
+              className='article-grid-item'
+              style={{ textDecoration: "none" }}
             >
-              <Card key={article.article_id}>
-                <div>
-                  <h2>{article.title}</h2>
-                  <p>{article.author}</p>
-                  <p>
-                    {article.topic.charAt(0).toUpperCase() +
-                      article.topic.slice(1)}
-                  </p>
-                </div>
-              </Card>
+              <div className='article-card'>
+                <img className='article-image'
+                  src={article.article_img_url}
+                  alt='article image'
+                ></img>
+                <h2>{article.title}</h2>
+                <p>Written by {article.author}</p>
+                <p>
+                  {article.topic.charAt(0).toUpperCase() +
+                    article.topic.slice(1)}
+                </p>
+              </div>
             </Link>
           );
         })}

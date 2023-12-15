@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { deleteComment, getCommentsByArticleId } from "../utils/api";
-import { Card } from "./Card";
 import Error from "./Error";
-import ClipLoader from "react-spinners/ClipLoader";
 
 export default function CommentCards({
   comments,
@@ -12,7 +10,6 @@ export default function CommentCards({
   isLoading,
   setIsLoading,
 }) {
-
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState(false);
   const { article_id } = useParams();
@@ -59,37 +56,35 @@ export default function CommentCards({
   }
 
   return (
-    <section>
+    <section className='comment-cards-container'>
       {comments.map((comment) => {
         return (
-          <Card key={comment.comment_id}>
-            <div>
-              <p>{comment.author}</p>
-              <p>{comment.body}</p>
-              <button
-                className='vote-buttons'
-                disabled={comment.comment_id === null}
-              >
-                Upvote
-              </button>
-              <p>{comment.votes}</p>
-              <button
-                className='vote-buttons'
-                disabled={comment.comment_id === null}
-              >
-                Downvote
-              </button>
-              <button
-                hidden={comment.author !== "tickle122"}
-                disabled={comment.comment_id === null || disabled}
-                onClick={() => {
-                  handleDelete(comment.comment_id, comment.author);
-                }}
-              >
-                Delete
-              </button>
-            </div>
-          </Card>
+          <section className='comment-cards' key={comment.comment_id}>
+            <p>{comment.author}</p>
+            <p>{comment.body}</p>
+            <button
+              className='button'
+              disabled={comment.comment_id === null}
+            >
+              Upvote
+            </button>
+            <p>{comment.votes}</p>
+            <button
+              className='button'
+              disabled={comment.comment_id === null}
+            >
+              Downvote
+            </button>
+            <button className='button'
+              hidden={comment.author !== "tickle122"}
+              disabled={comment.comment_id === null || disabled}
+              onClick={() => {
+                handleDelete(comment.comment_id, comment.author);
+              }}
+            >
+              Delete
+            </button>
+          </section >
         );
       })}
     </section>

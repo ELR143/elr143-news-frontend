@@ -1,5 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Header() {
-  return <h1 className='header-user-container'>ELR News</h1>;
+  return (
+    <Link to='/'>
+      <img
+        className='header-logo'
+        src={"../src/assets/ELRnews.png"}
+        alt='website logo'
+      />
+    </Link>
+  );
 }

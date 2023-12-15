@@ -67,7 +67,7 @@ export default function PostComment({ setComments, isLoading, setIsLoading }) {
     return <h1>Loading...</h1>;
   } else {
     return (
-      <section>
+      <section id='post-comment-container'>
         <form onSubmit={handleSubmit}>
           <label htmlFor='post-comment'>
             <input
@@ -78,7 +78,7 @@ export default function PostComment({ setComments, isLoading, setIsLoading }) {
               value={input}
             ></input>
           </label>
-          <button disabled={input.length < 1 || disabled}>Post</button>
+          <button className='button' disabled={input.length < 1 || disabled}>Post</button>
         </form>
       </section>
     );
