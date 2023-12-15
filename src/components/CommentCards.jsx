@@ -57,13 +57,6 @@ export default function CommentCards({
     return <Error message={"Something went wrong. Please try again later"} />;
   }
 
-  if (isLoading) {
-    return (
-      <div className='loader-container'>
-        <ClipLoader color={"#F696969"} size={20} />
-      </div>
-    );
-  }
   return (
     <section>
       {comments.map((comment) => {
@@ -72,12 +65,22 @@ export default function CommentCards({
             <div>
               <p>{comment.author}</p>
               <p>{comment.body}</p>
-              <button className='vote-buttons'>Upvote</button>
+              <button
+                className='vote-buttons'
+                disabled={comment.comment_id === null}
+              >
+                Upvote
+              </button>
               <p>{comment.votes}</p>
-              <button className='vote-buttons'>Downvote</button>
+              <button
+                className='vote-buttons'
+                disabled={comment.comment_id === null}
+              >
+                Downvote
+              </button>
               <button
                 hidden={comment.author !== "tickle122"}
-                disabled={disabled}
+                disabled={comment.comment_id === null || disabled}
                 onClick={() => {
                   handleDelete(comment.comment_id, comment.author);
                 }}
