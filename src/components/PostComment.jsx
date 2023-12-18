@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { postComment } from "../utils/api";
 import { useParams } from "react-router-dom";
 import Error from "./Error";
-import ClipLoader from "react-spinners/ClipLoader";
+
 
 export default function PostComment({ setComments, isLoading, setIsLoading }) {
   const [input, setInput] = useState("");

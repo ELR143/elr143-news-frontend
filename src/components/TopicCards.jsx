@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect } from "react";
 import { getTopics } from "../utils/api";
 import { Card } from "./Card";

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import ArticleByIdCard from "../components/ArticleByIdCard";
 import CommentsContainer from "../components/CommentsContainer";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { updateArticleVotes } from "./api";
 
 export const upVote = (
