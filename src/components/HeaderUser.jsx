@@ -5,7 +5,7 @@ export default function Header() {
     <Link to='/'>
       <img
         className='header-logo'
-        src={"../dist/assets/ELRnews.png"}
+        src={"../src/assets/ELRnews.png"}
         alt='website logo'
       />
     </Link>
