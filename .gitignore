@@ -1,3 +1,5 @@
 node_modules
 
 oldVoteHandler.jsx
+# Local Netlify folder
+.netlify
